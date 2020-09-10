@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_prog.c                                       :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/10 12:27:38 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/10 13:29:10 by cbertola         ###   ########.fr       */
+/*   Created: 2020/09/10 16:24:00 by cbertola          #+#    #+#             */
+/*   Updated: 2020/09/10 16:32:14 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void        *ft_start(void *gbl)
+long int    get_time(long int type)
 {
-	t_gbl *infos;
+    long int        time;
+    struct timeval  te;
+    
+    gettimeofday(&te, NULL);
+    if (type == 0)
+        time = te.tv_sec * 1000LL + te.tv_usec/1000;
+    else
+        time = (te.tv_sec * 1000LL + te.tv_usec/1000) - type; 
 
-	infos = (t_gbl *)gbl;
-
-	if (pthread_mutex_lock(&infos->talk) == 0)
-	{
-		printf("toto\n");
-		sleep(1);
-		pthread_mutex_unlock(&infos->talk);
-	}
-	return (gbl);
+    return (time);
 }

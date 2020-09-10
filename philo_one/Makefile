@@ -10,7 +10,7 @@ INCS = $(addprefix -I,$(INCS_PATH)) -lpthread
 
 OBJS_NAME = $(SRCS_NAME:.c=.o)
 
-SRCS_NAME= 		ft_lib.c main.c start_prog.c
+SRCS_NAME= 		ft_lib.c main.c start.c utils.c
 
 CC = gcc
 
