@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 12:27:38 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/11 13:01:52 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/11 13:08:18 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void    ft_eat(int id, long int timestamp, t_gbl *gbl, char *message)
     pthread_mutex_lock(&gbl->m_forks[id + i]) == 0)
     {
         ft_messages(id, timestamp, gbl, message);
-        osleep(gbl->time_eat);
+        osleep(gbl->time_to_eat);
         pthread_mutex_unlock(&gbl->m_forks[id]);
         pthread_mutex_unlock(&gbl->m_forks[id + i]);
     }
@@ -45,7 +45,7 @@ void    ft_eat(int id, long int timestamp, t_gbl *gbl, char *message)
 void    ft_sleep(int id, long int timestamp, t_gbl *gbl, char *message)
 {
         ft_messages(id, timestamp, gbl, message);
-        osleep(gbl->time_sleep);
+        osleep(gbl->time_to_sleep);
 }
 
 void        *ft_start(void *args)

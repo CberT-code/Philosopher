@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:23:34 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/11 13:04:59 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/11 13:08:03 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ typedef struct			s_gbl
 {
     int                 maxphilo;
     int                 thread;
-    long int            time_die;
-    long int            time_eat;
-    long int            time_sleep;
+    long int            time_to_die;
+    long int            time_to_eat;
+    long int            time_to_sleep;
     int                 max_eat;
     t_philo             *philo;
     pthread_mutex_t     *m_philo;
