@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:21:06 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/10 15:23:18 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/11 10:23:20 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,14 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	else
 		ft_putchar_fd((nbr + '0'), fd);
+}
+
+void	*ft_calloc(size_t n, size_t size)
+{
+	void *new;
+
+	if (!(new = (void *)malloc(size * n)))
+		return (0);
+	ft_bzero(new, size * n);
+	return ((void *)new);
 }
