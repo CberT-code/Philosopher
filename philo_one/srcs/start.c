@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 12:27:38 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/11 12:52:33 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/11 13:01:52 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void    ft_sleep(int id, long int timestamp, t_gbl *gbl, char *message)
 {
         ft_messages(id, timestamp, gbl, message);
         osleep(gbl->time_sleep);
-    }
 }
 
 void        *ft_start(void *args)
@@ -62,7 +61,8 @@ void        *ft_start(void *args)
 	while (1)
 	{
 		ft_eat(id, get_time(stime), gbl, "IS EATING");
-		ft_sleep(id, get_time(stime), gbl, "IS EATING");
+		ft_sleep(id, get_time(stime), gbl, "IS SLEEPING");
+        ft_messages(id, 0, gbl, "IS THINKING");
         osleep(100);
 	}
 	return (gbl);

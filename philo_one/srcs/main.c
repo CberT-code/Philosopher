@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/11 12:45:35 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/11 13:03:32 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int         main(int argc, char **argv)
             return (0);
         init_mutex(&gbl);
         init_philo(&gbl);
+        monitoring(&gbl);
         while (1);
     }
     else if (argc < 5)
