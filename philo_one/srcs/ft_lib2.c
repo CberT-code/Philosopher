@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lib2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:21:06 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/11 13:23:30 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/11 14:27:11 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo_one.h"
+#include "../includes/philo.h"
 
-void	ft_putchar_fd(char c, int fd)
+void		ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
 
-void	ft_putnbr_fd(int n, int fd)
+void		ft_putnbr_fd(int n, int fd)
 {
 	long int nbr;
 
@@ -36,16 +36,18 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putchar_fd((nbr + '0'), fd);
 }
 
-t_philos	*ft_philosnew(int id, long int t_die)
+t_philo		*ft_philosnew(int id, long int t_die)
 {
-	t_philos *philos;
+	t_philo *philos;
 
-	philos = calloc(1, sizeof(t_philos));
+	philos = ft_calloc(1, sizeof(t_philo));
+	philos->id = id;
+	philos->t_die = t_die;
 	philos->next = NULL;
 	return (philos);
 }
 
-t_philos	*ft_philoslast(t_philos *philos)
+t_philo		*ft_philoslast(t_philo *philos)
 {
 	if (!philos)
 		return (NULL);
@@ -54,7 +56,7 @@ t_philos	*ft_philoslast(t_philos *philos)
 	return (philos);
 }
 
-void	ft_philosadd_back(t_philos **aphilos, int id, long int t_die)
+void		ft_philosadd_back(t_philo **aphilos, int id, long int t_die)
 {
 	if (*aphilos != NULL)
 		ft_philoslast(*aphilos)->next = ft_philosnew(id, t_die);
@@ -62,3 +64,14 @@ void	ft_philosadd_back(t_philos **aphilos, int id, long int t_die)
 		*aphilos = ft_philosnew(id, t_die);
 }
 
+t_philo		*find_philo(int id, t_gbl *gbl)
+{
+	t_philo	*philo;
+
+	philo = gbl->philo;
+	while (id != philo->id)
+	{
+		philo = philo->next;
+	}
+	return (philo);
+}

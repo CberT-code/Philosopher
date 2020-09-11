@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:23:34 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/11 13:08:03 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/11 14:58:17 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,9 @@ void                            *ft_start(void *gbl);
 long int                        get_time(long int type);
 void                            osleep(long int time);
 
+void	                        ft_philosadd_back(t_philo **aphilos, int id, long int t_die);
+
+t_philo		                    *find_philo(int id, t_gbl *gbl);
+
+int	                        	monitoring(t_gbl *gbl);
 #endif

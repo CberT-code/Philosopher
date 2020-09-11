@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/11 13:10:01 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/11 15:05:28 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ int        init_mutex(t_gbl *gbl)
     pthread_mutex_t     *forks;
     int                 i;
 
-    philo = ft_calloc(gbl->maxphilo + 1, sizeof(pthread_mutex_t));
-    forks = ft_calloc(gbl->maxphilo + 1, sizeof(pthread_mutex_t));
+    philo = ft_calloc(gbl->maxphilo, sizeof(pthread_mutex_t));
+    forks = ft_calloc(gbl->maxphilo, sizeof(pthread_mutex_t));
+    gbl->philo = NULL;
     i = 0;
     while (i < gbl->maxphilo)
     {
@@ -46,6 +47,7 @@ int        init_mutex(t_gbl *gbl)
         if (i != 0)
 	        pthread_mutex_lock(&philo[i]);
 	    pthread_mutex_unlock(&forks[i]);
+        ft_philosadd_back(&gbl->philo, i, gbl->time_to_die);
         i++;
     }
     gbl->m_philo = philo;
@@ -70,7 +72,8 @@ void        init_philo(t_gbl *gbl)
 
 int         main(int argc, char **argv)
 {
-    t_gbl gbl;
+    t_gbl   gbl;
+    int     i;
     
     if (argc == 5 || argc == 6)
     {
@@ -78,8 +81,9 @@ int         main(int argc, char **argv)
             return (0);
         init_mutex(&gbl);
         init_philo(&gbl);
-        //monitoring(&gbl);
-        while (1);
+        i = monitoring(&gbl);
+        ft_putnbr_fd(i, 1);
+        ft_putstr_fd(" IS DEAD\n", 1);
     }
     else if (argc < 5)
         ft_putstr_fd("More arguments needed\n", 2);
