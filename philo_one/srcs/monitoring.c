@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 13:03:01 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/15 09:52:39 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/15 13:49:51 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 void		monitoring(t_gbl *gbl)
 {
 	int i;
+	t_philo *philo;
 
+	philo = gbl->philo;
 	i = 0;
 	while (gbl->is_dead == 0)
 	{
-		
-		// printf("here philo -> %d\n", i);
-		// printf("here we test t_die -> %ld\n", gbl->philo[i].t_die);
-		if (get_time(gbl->philo[i].t_die) > gbl->time_to_die)
+		if (get_time(philo[i].t_die) > gbl->time_to_die ||
+		philo[i].t_die == gbl->max_eat)
 		{
-			aff_msg(get_time(gbl->philo[i].t_start), gbl->philo[i].id + 48,
+			aff_msg(get_time(philo[i].t_start), philo[i].id + 48,
 			"IS DEAD", 1);
 			gbl->is_dead = 1;
 			return ;
