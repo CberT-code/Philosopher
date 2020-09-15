@@ -27,7 +27,5 @@ int      main(int argc, char **argv)
       str[i] = i != 0 ? ((j % 10) + '0') : j + '0';
       j = (j / 10);
 	}
-   printf("here we test -> |%s|\n", str);
-   printf("here we test -> %c\n", str[0]);
 	return (1);
 }
