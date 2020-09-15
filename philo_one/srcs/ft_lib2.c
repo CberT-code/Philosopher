@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:21:06 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/11 14:27:11 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/15 08:25:41 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,61 +17,53 @@ void		ft_putchar_fd(char c, int fd)
 	write(fd, &c, 1);
 }
 
-void		ft_putnbr_fd(int n, int fd)
+int			size_int(long int nb)
 {
-	long int nbr;
+	int i;
 
-	nbr = n;
-	if (nbr < 0)
+	i = 0;
+	while ((nb = nb / 10) > 0)
+		i++;
+	return (++i);
+}
+char		*nbr_to_char_fd(long int n)
+{
+	int 	i;
+	char	*str;
+
+	str = ft_calloc(size_int(n), sizeof(char));
+	i = size_int(n);
+	str[size_int(n)] = '\0';
+	while (i-- >= 0)
 	{
-		nbr *= -1;
-		ft_putchar_fd('-', fd);
+		str[i] = i != 0 ? ((n % 10) + '0') : n + '0';
+    	n = (n / 10);
 	}
-	if (nbr >= 10)
+	return (str);
+}
+
+void		aff_msg(long int nb, char c, char *str2, int fd)
+{
+	int 	i;
+	char 	res[size_int(nb) + 3 + ft_strlen(str2)];
+	char	str[size_int(nb)];
+
+	i = size_int(nb);
+	str[size_int(nb)] = '\0';
+	while (i-- >= 0)
 	{
-		ft_putnbr_fd(nbr / 10, fd);
-		ft_putchar_fd(((nbr % 10) + '0'), fd);
+		str[i] = i != 0 ? ((nb % 10) + '0') : nb + '0';
+    	nb = (nb / 10);
 	}
-	else
-		ft_putchar_fd((nbr + '0'), fd);
-}
-
-t_philo		*ft_philosnew(int id, long int t_die)
-{
-	t_philo *philos;
-
-	philos = ft_calloc(1, sizeof(t_philo));
-	philos->id = id;
-	philos->t_die = t_die;
-	philos->next = NULL;
-	return (philos);
-}
-
-t_philo		*ft_philoslast(t_philo *philos)
-{
-	if (!philos)
-		return (NULL);
-	while (philos->next)
-		philos = philos->next;
-	return (philos);
-}
-
-void		ft_philosadd_back(t_philo **aphilos, int id, long int t_die)
-{
-	if (*aphilos != NULL)
-		ft_philoslast(*aphilos)->next = ft_philosnew(id, t_die);
-	else
-		*aphilos = ft_philosnew(id, t_die);
-}
-
-t_philo		*find_philo(int id, t_gbl *gbl)
-{
-	t_philo	*philo;
-
-	philo = gbl->philo;
-	while (id != philo->id)
-	{
-		philo = philo->next;
-	}
-	return (philo);
+	i = -1;
+	while (str[++i])
+		res[i] = str[i];
+	res[i] = ' ';
+	res[++i] = c;
+	res[++i] = ' ';
+	while (*str2)
+		res[++i] = *str2++;
+	res[++i] = '\n';
+	res[++i] = '\0';
+	write(fd, &res, ft_strlen(res));
 }

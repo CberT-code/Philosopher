@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/14 11:05:35 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/15 05:37:43 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ int        init_mutex(t_gbl *gbl)
 {
     pthread_mutex_t     philo[gbl->maxphilo];
     pthread_mutex_t     forks[gbl->maxphilo];
-    t_philo             philos[gbl->maxphilo];    
+    t_philo             *philos;    
     int                 i;
 
     gbl->philo = NULL;
     i = 0;
+    philos = ft_calloc(sizeof(t_philo), gbl->maxphilo);
     while (i < gbl->maxphilo)
     {
         pthread_mutex_init(&philo[i], NULL);
@@ -53,6 +54,7 @@ int        init_mutex(t_gbl *gbl)
     }
     gbl->m_philo = philo;
     gbl->m_forks = forks;
+    gbl->philo = philos;
     return (1);
 }
 
@@ -63,9 +65,9 @@ void        init_philo(t_gbl *gbl)
     gbl->thread = 0;
     while (gbl->thread < gbl->maxphilo)
     {
-        if (pthread_create(&thread, NULL, ft_start, gbl) != 0)
+        if (pthread_create(&thread[gbl->thread], NULL, ft_start, gbl) != 0)
             return ;
-        pthread_detach(thread);
+        pthread_detach(thread[gbl->thread]);
         osleep(10);
         gbl->thread += 1;
     }
@@ -74,7 +76,7 @@ void        init_philo(t_gbl *gbl)
 int         main(int argc, char **argv)
 {
     t_gbl   gbl;
-    int     i;
+   // int     i;
     
     if (argc == 5 || argc == 6)
     {
@@ -82,9 +84,10 @@ int         main(int argc, char **argv)
             return (0);
         init_mutex(&gbl);
         init_philo(&gbl);
-        i = monitoring(&gbl);
-        ft_putnbr_fd(i, 1);
-        ft_putstr_fd(" IS DEAD\n", 1);
+        while (1);
+       // i = monitoring(&gbl);
+        //ft_putnbr_fd(i, 1);
+       // ft_putstr_fd(" IS DEAD\n", 1);
     }
     else if (argc < 5)
         ft_putstr_fd("More arguments needed\n", 2);

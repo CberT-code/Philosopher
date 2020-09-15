@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:23:34 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/15 05:04:45 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/15 06:53:42 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,14 @@ int                             ft_strlen(char *str);
 void                            ft_putstr_fd(char *str, int fd);
 unsigned long long              ft_atoi(const char *str);
 void	                        ft_bzero(void *s, size_t n);
-void	                        ft_putnbr_fd(int n, int fd);
 void                            *ft_calloc(size_t n, size_t size);
+void		                    aff_msg(long int nb, char c, char *str2, int fd);
 
 void                            *ft_start(void *gbl);
 
 long int                        get_time(long int type);
 void                            osleep(long int time);
 
-void	                        ft_philosadd_back(t_philo **aphilos, int id, long int t_die);
 
 t_philo		                    *find_philo(int id, t_gbl *gbl);
 
