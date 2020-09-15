@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 12:27:38 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/15 06:59:33 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/15 08:52:32 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void        *ft_start(void *args)
     philo = gbl->philo[gbl->thread];
 	ft_messages(philo, 0, gbl, "was created");
 	stime = get_time(0);
-	while (philo.is_dead == 0)
+	while (gbl->is_dead == 0)
 	{
 		ft_eat(philo, get_time(stime), gbl, "IS EATING");
 		ft_sleep(philo, get_time(stime), gbl, "IS SLEEPING");
