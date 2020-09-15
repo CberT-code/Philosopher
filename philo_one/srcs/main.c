@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/15 05:37:43 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/15 09:44:34 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int        init_gbl(int argc, char **argv, t_gbl *gbl)
 {
     pthread_mutex_init(&gbl->talk, NULL);
     pthread_mutex_unlock(&gbl->talk);
+    gbl->is_dead = 0;
     if ((gbl->maxphilo = ft_atoi(argv[1])) == 0 ||
     (gbl->time_to_die = ft_atoi(argv[2])) == 0 ||
     (gbl->time_to_eat = ft_atoi(argv[3])) == 0 ||
@@ -30,13 +31,16 @@ int        init_gbl(int argc, char **argv, t_gbl *gbl)
 
 int        init_mutex(t_gbl *gbl)
 {
-    pthread_mutex_t     philo[gbl->maxphilo];
-    pthread_mutex_t     forks[gbl->maxphilo];
+    pthread_mutex_t     *philo;
+    pthread_mutex_t     *forks;
     t_philo             *philos;    
     int                 i;
 
     gbl->philo = NULL;
     i = 0;
+
+    philo = ft_calloc(sizeof(pthread_mutex_t ), gbl->maxphilo);
+    forks = ft_calloc(sizeof(pthread_mutex_t ), gbl->maxphilo);
     philos = ft_calloc(sizeof(t_philo), gbl->maxphilo);
     while (i < gbl->maxphilo)
     {
@@ -49,7 +53,7 @@ int        init_mutex(t_gbl *gbl)
 	    pthread_mutex_unlock(&forks[i]);
         ft_bzero(&philo[i], sizeof(t_philo));
         philos[i].id = i;
-	    philos[i].t_die = gbl->time_to_die;
+	   // philos[i].t_die = gbl->time_to_die;
         i++;
     }
     gbl->m_philo = philo;
@@ -76,7 +80,6 @@ void        init_philo(t_gbl *gbl)
 int         main(int argc, char **argv)
 {
     t_gbl   gbl;
-   // int     i;
     
     if (argc == 5 || argc == 6)
     {
@@ -84,10 +87,7 @@ int         main(int argc, char **argv)
             return (0);
         init_mutex(&gbl);
         init_philo(&gbl);
-        while (1);
-       // i = monitoring(&gbl);
-        //ft_putnbr_fd(i, 1);
-       // ft_putstr_fd(" IS DEAD\n", 1);
+        monitoring(&gbl);
     }
     else if (argc < 5)
         ft_putstr_fd("More arguments needed\n", 2);
