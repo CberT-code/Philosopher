@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:23:34 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/11 14:58:17 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/15 05:04:45 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct			s_philo
     long int			t_start;
 	long int			t_die;
 	int					eat;
-    struct s_philo      *next;
+    int                 is_dead;
 }						t_philo;
 
 typedef struct			s_gbl

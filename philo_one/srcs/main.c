@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/11 15:05:28 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/14 11:05:35 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,11 @@ int        init_gbl(int argc, char **argv, t_gbl *gbl)
 
 int        init_mutex(t_gbl *gbl)
 {
-    pthread_mutex_t     *philo;
-    pthread_mutex_t     *forks;
+    pthread_mutex_t     philo[gbl->maxphilo];
+    pthread_mutex_t     forks[gbl->maxphilo];
+    t_philo             philos[gbl->maxphilo];    
     int                 i;
 
-    philo = ft_calloc(gbl->maxphilo, sizeof(pthread_mutex_t));
-    forks = ft_calloc(gbl->maxphilo, sizeof(pthread_mutex_t));
     gbl->philo = NULL;
     i = 0;
     while (i < gbl->maxphilo)
@@ -47,7 +46,9 @@ int        init_mutex(t_gbl *gbl)
         if (i != 0)
 	        pthread_mutex_lock(&philo[i]);
 	    pthread_mutex_unlock(&forks[i]);
-        ft_philosadd_back(&gbl->philo, i, gbl->time_to_die);
+        ft_bzero(&philo[i], sizeof(t_philo));
+        philos[i].id = i;
+	    philos[i].t_die = gbl->time_to_die;
         i++;
     }
     gbl->m_philo = philo;
@@ -57,7 +58,7 @@ int        init_mutex(t_gbl *gbl)
 
 void        init_philo(t_gbl *gbl)
 {
-    pthread_t   thread;
+    pthread_t   thread[gbl->maxphilo];
 
     gbl->thread = 0;
     while (gbl->thread < gbl->maxphilo)
