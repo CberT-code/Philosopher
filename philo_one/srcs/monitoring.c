@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 13:03:01 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/16 13:34:51 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/16 13:37:18 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ void		*monitoring_impair(void *args)
 
 void		monitoring(t_gbl *gbl)
 {
-	pthread_t   monitor_pair;
+	pthread_t   monitor_impair;
 
-	if (pthread_create(&monitor_pair, NULL, monitoring_impair, gbl) != 0)
+	if (pthread_create(&monitor_impair, NULL, monitoring_impair, gbl) != 0)
         return ;
-    pthread_detach(monitor_pair);
+    pthread_detach(monitor_impair);
 	monitoring_pair(gbl);
 }
