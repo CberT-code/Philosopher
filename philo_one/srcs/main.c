@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/16 17:28:13 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/16 18:32:47 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ int        init_gbl(int argc, char **argv, t_gbl *gbl)
 int        init_mutex(t_gbl *gbl)
 {  
     int                 i;
+    long int            time;
 
     gbl->philo = NULL;
     i = 0;
-
+    time = get_time(0);
     gbl->m_philo = ft_calloc(sizeof(pthread_mutex_t ), gbl->maxphilo);
     gbl->m_forks = ft_calloc(sizeof(pthread_mutex_t ), gbl->maxphilo);
     gbl->philo = ft_calloc(sizeof(t_philo), gbl->maxphilo);
@@ -52,7 +53,8 @@ int        init_mutex(t_gbl *gbl)
 	    pthread_mutex_unlock(&gbl->m_forks[i]);
         ft_bzero(&gbl->m_philo[i], sizeof(t_philo));
         gbl->philo[i].id = i;
-        gbl->philo[i].t_start = -1;
+        gbl->philo[i].t_start = time;
+        gbl->philo[i].t_die = -1;
         i++;
     }
     return (1);

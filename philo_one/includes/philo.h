@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:23:34 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/16 16:13:38 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/16 18:14:44 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void                            *ft_calloc(size_t n, size_t size);
 void		                    aff_msg(long int nb, int id, char *str2, int fd);
 
 void                            *ft_start(void *gbl);
-void                            ft_messages(t_philo *philo, t_gbl *gbl, char *message);
+void                            ft_messages(t_philo *philo, long int time, t_gbl *gbl, char *message);
 void                            ft_messages_dead(t_philo *philo, long int time, t_gbl *gbl, char *message);
 
 long int                        get_time(long int type);
