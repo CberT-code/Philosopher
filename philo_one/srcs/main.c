@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/15 13:52:43 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/16 13:05:59 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int        init_mutex(t_gbl *gbl)
 	    pthread_mutex_unlock(&gbl->m_forks[i]);
         ft_bzero(&gbl->m_philo[i], sizeof(t_philo));
         gbl->philo[i].id = i;
+        gbl->philo[i].t_start = -1;
         i++;
     }
     return (1);

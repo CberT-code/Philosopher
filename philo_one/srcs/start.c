@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 12:27:38 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/15 13:37:39 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/16 13:05:49 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void    ft_messages(t_philo *philo, t_gbl *gbl, char *message)
 {
     if (pthread_mutex_lock(&gbl->talk) == 0)
     {
-        aff_msg(get_time(philo->t_start), philo->id + 48, message, 1);
+        aff_msg(get_time(philo->t_start), philo->id + 1, message, 1);
         pthread_mutex_unlock(&gbl->talk);
     }
 }
@@ -32,9 +32,9 @@ void    ft_eat(t_philo *philo, t_gbl *gbl, char *message)
         ft_messages(philo, gbl, "has taken a fork");
         if (pthread_mutex_lock(&gbl->m_forks[philo->id]) == 0)
         {
-            philo->t_die = get_time(0);
             ft_messages(philo, gbl, "has taken a fork");
             ft_messages(philo, gbl, message);
+            philo->t_die = get_time(0);
             philo->eat += 1;
             osleep(gbl->time_to_eat);
             pthread_mutex_unlock(&gbl->m_forks[philo->id]);
