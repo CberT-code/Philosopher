@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:23:34 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/16 12:36:07 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/16 14:08:49 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct			s_gbl
     long int            time_to_sleep;
     int                 max_eat;
     int                 is_dead;
+    int                 id_monitor;
     t_philo             *philo;
     pthread_mutex_t     *m_philo;
     pthread_mutex_t     *m_forks;
