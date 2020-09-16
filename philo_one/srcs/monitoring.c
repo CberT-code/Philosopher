@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 13:03:01 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/16 13:15:28 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/16 13:34:51 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		monitoring_pair(t_gbl *gbl)
 {
-	int i;
+	int		i;
 	t_philo *philo;
 	
 	philo = gbl->philo;
@@ -37,8 +37,8 @@ void		monitoring_pair(t_gbl *gbl)
 
 void		*monitoring_impair(void *args)
 {
-	int i;
-	t_philo *philo;
+	int			i;
+	t_philo		*philo;
 	t_gbl 		*gbl;
 
 	gbl = (t_gbl *)args;
