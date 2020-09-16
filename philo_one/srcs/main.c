@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/16 13:05:59 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/16 17:28:13 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int        init_gbl(int argc, char **argv, t_gbl *gbl)
 {
     pthread_mutex_init(&gbl->talk, NULL);
     pthread_mutex_unlock(&gbl->talk);
-    gbl->is_dead = 0;
+    gbl->is_dead = -1;
     if ((gbl->maxphilo = ft_atoi(argv[1])) == 0 ||
     (gbl->time_to_die = ft_atoi(argv[2])) == 0 ||
     (gbl->time_to_eat = ft_atoi(argv[3])) == 0 ||
@@ -39,6 +39,8 @@ int        init_mutex(t_gbl *gbl)
     gbl->m_philo = ft_calloc(sizeof(pthread_mutex_t ), gbl->maxphilo);
     gbl->m_forks = ft_calloc(sizeof(pthread_mutex_t ), gbl->maxphilo);
     gbl->philo = ft_calloc(sizeof(t_philo), gbl->maxphilo);
+    pthread_mutex_init(&gbl->m_isdead, NULL);
+    pthread_mutex_unlock(&gbl->m_isdead);
     while (i < gbl->maxphilo)
     {
         pthread_mutex_init(&gbl->m_philo[i], NULL);

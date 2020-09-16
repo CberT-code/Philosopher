@@ -6,18 +6,34 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 12:27:38 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/16 13:05:49 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/16 17:35:20 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+void    ft_messages_dead(t_philo *philo, long int time, t_gbl *gbl, char *message)
+{
+    (void)gbl;
+    // if (pthread_mutex_lock(&gbl->talk) == 0)
+    // {
+        aff_msg(time, philo->id + 1, message, 1);
+        // pthread_mutex_unlock(&gbl->talk);
+        // pthread_mutex_unlock(&gbl->m_isdead);
+    // }
+}
+
 void    ft_messages(t_philo *philo, t_gbl *gbl, char *message)
 {
     if (pthread_mutex_lock(&gbl->talk) == 0)
     {
-        aff_msg(get_time(philo->t_start), philo->id + 1, message, 1);
-        pthread_mutex_unlock(&gbl->talk);
+        usleep(10);
+         if (pthread_mutex_lock(&gbl->m_isdead) == 0)
+        {
+            aff_msg(get_time(philo->t_start), philo->id + 1, message, 1);
+            pthread_mutex_unlock(&gbl->m_isdead);
+            pthread_mutex_unlock(&gbl->talk);
+        }
     }
 }
 
@@ -62,7 +78,7 @@ void        *ft_start(void *args)
 	philo->t_start = get_time(0);
 	ft_messages(philo, gbl, "was created");
 	philo->t_die = get_time(0);
-	while (gbl->is_dead == 0)
+	while (gbl->is_dead == -1)
 	{
 		ft_eat(philo, gbl, "is eating");
 		ft_sleep(philo, gbl, "is sleeping");

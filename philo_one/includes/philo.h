@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:23:34 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/16 14:08:49 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/16 16:13:38 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ typedef struct			s_gbl
     long int            time_to_sleep;
     int                 max_eat;
     int                 is_dead;
+    long int            dead_time;
     int                 id_monitor;
     t_philo             *philo;
+    pthread_mutex_t     m_isdead;
     pthread_mutex_t     *m_philo;
     pthread_mutex_t     *m_forks;
     pthread_mutex_t     talk;
@@ -54,6 +56,7 @@ void		                    aff_msg(long int nb, int id, char *str2, int fd);
 
 void                            *ft_start(void *gbl);
 void                            ft_messages(t_philo *philo, t_gbl *gbl, char *message);
+void                            ft_messages_dead(t_philo *philo, long int time, t_gbl *gbl, char *message);
 
 long int                        get_time(long int type);
 void                            osleep(long int time);
