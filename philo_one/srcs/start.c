@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 12:27:38 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/16 19:27:48 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/16 19:43:50 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void    ft_messages2(t_philo *philo, long int time, t_gbl *gbl, char *message)
         {
             aff_msg(time, philo->id + 1, "has taken a fork", 1);
             aff_msg(time, philo->id + 1, message, 1);
-            pthread_mutex_unlock(&gbl->m_isdead);
             pthread_mutex_unlock(&gbl->talk);
+            pthread_mutex_unlock(&gbl->m_isdead);
         }
     }
 }

@@ -6,11 +6,11 @@ INCS_PATH = ./includes/
 
 SRCS = $(addprefix $(SRCS_PATH),$(SRCS_NAME))
 OBJS = $(addprefix $(OBJS_PATH),$(OBJS_NAME))
-INCS = $(addprefix -I,$(INCS_PATH)) -lpthread
+INCS = $(addprefix -I,$(INCS_PATH))
 
 OBJS_NAME = $(SRCS_NAME:.c=.o)
 
-SRCS_NAME= 		ft_lib.c ft_lib2.c main.c start.c utils.c monitoring.c
+SRCS_NAME= 		ft_lib.c ft_lib2.c main.c start.c utils.c monitoring.c free.c
 
 CC = gcc
 

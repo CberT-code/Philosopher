@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:23:34 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/16 18:14:44 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/17 13:21:28 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,6 @@ void                            osleep(long int time);
 t_philo		                    *find_philo(int id, t_gbl *gbl);
 
 void		                    monitoring(t_gbl *gbl);
+
+int                             free_all(t_gbl *gbl);
 #endif
