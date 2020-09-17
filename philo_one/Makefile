@@ -6,7 +6,7 @@ INCS_PATH = ./includes/
 
 SRCS = $(addprefix $(SRCS_PATH),$(SRCS_NAME))
 OBJS = $(addprefix $(OBJS_PATH),$(OBJS_NAME))
-INCS = $(addprefix -I,$(INCS_PATH))
+INCS = $(addprefix -I,$(INCS_PATH)) -lpthread
 
 OBJS_NAME = $(SRCS_NAME:.c=.o)
 
