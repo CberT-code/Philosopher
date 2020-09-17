@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 12:27:38 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/17 20:57:16 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/17 20:57:53 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void        *ft_start(void *args)
 
 	gbl = (t_gbl *)args;
     philo = &gbl->philo[gbl->thread];
-    printf("here we test -> %p\n", gbl);
 	ft_messages(philo, get_time(philo->t_start), gbl, "was created");
 	philo->t_die = get_time(0);
 	while (gbl->is_dead == -1)
