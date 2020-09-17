@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/17 18:51:00 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/17 19:49:01 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 
 int        init_gbl(int argc, char **argv, t_gbl *gbl)
 {
-    (void)argv;
-    (void)argc;
-   // pthread_mutex_init(&gbl->talk, NULL);
-    //pthread_mutex_unlock(&gbl->talk);
+    pthread_mutex_init(&gbl->talk, NULL);
+    pthread_mutex_unlock(&gbl->talk);
     gbl->is_dead = -1;
-    // if ((gbl->maxphilo = ft_atoi(argv[1])) == 0 ||
-    // (gbl->time_to_die = ft_atoi(argv[2])) == 0 ||
-    // (gbl->time_to_eat = ft_atoi(argv[3])) == 0 ||
-    // (gbl->time_to_sleep = ft_atoi(argv[4])) == 0 ||
-    // (argc == 6 && (gbl->max_eat = ft_atoi(argv[5])) == 0))
-    // {
-    //     ft_putstr_fd("WRONG ARGUMENT\n", 2);
-    //     return (0);
-    // }
+    if ((gbl->maxphilo = ft_atoi(argv[1])) == 0 ||
+    (gbl->time_to_die = ft_atoi(argv[2])) == 0 ||
+    (gbl->time_to_eat = ft_atoi(argv[3])) == 0 ||
+    (gbl->time_to_sleep = ft_atoi(argv[4])) == 0 ||
+    (argc == 6 && (gbl->max_eat = ft_atoi(argv[5])) == 0))
+    {
+        ft_putstr_fd("WRONG ARGUMENT\n", 2);
+        return (0);
+    }
     return (1);
 }
 
@@ -73,22 +71,20 @@ void        init_philo(t_gbl *gbl)
 
 int         main(int argc, char **argv)
 {
-    // t_gbl   gbl;
-    (void)argv;
-    (void)argc;
+    t_gbl   gbl;
     
-    // if (argc == 5 || argc == 6)
-    // {
-    //     // if (init_gbl(argc, argv, &gbl) == 0)
-    //     //     return (0);
-    //     //init_mutex(&gbl);
-    //     //free_all(&gbl);
-    //     // init_philo(&gbl);
-    //     // monitoring(&gbl);
-    // }
-    // else if (argc < 5)
-    //     ft_putstr_fd("More arguments needed\n", 2);
-    // else
-    //     ft_putstr_fd("Too much arguments\n", 2);
+    if (argc == 5 || argc == 6)
+    {
+        if (init_gbl(argc, argv, &gbl) == 0)
+            return (0);
+        init_mutex(&gbl);
+        init_philo(&gbl);
+        monitoring(&gbl);
+        free_all(&gbl);
+    }
+    else if (argc < 5)
+        ft_putstr_fd("More arguments needed\n", 2);
+    else
+        ft_putstr_fd("Too much arguments\n", 2);
     return (1);
 }
