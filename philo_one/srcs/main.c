@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 21:02:07 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/18 22:07:23 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int        init_mutex(t_gbl *gbl)
     gbl->philo = NULL;
     i = 0;
     gbl->t_start = get_time(0);
-    gbl->m_forks = ft_calloc(sizeof(pthread_mutex_t), gbl->maxphilo);
+    gbl->m_forks = ft_calloc(sizeof(pthread_mutex_t), gbl->maxphilo + 1);
     gbl->philo = ft_calloc(sizeof(t_philo), gbl->maxphilo);
     while (i < gbl->maxphilo)
     {
@@ -68,8 +68,9 @@ void        init_philo(t_gbl *gbl)
         if (pthread_create(&thread[i], NULL, ft_start, philo) != 0)
             return ;
         pthread_detach(thread[i]);
-        osleep(3);
+        osleep(1);
         i++;
+
     }
 }
 

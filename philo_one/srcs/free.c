@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/17 20:57:28 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/18 21:53:11 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int        free_all(t_gbl *gbl)
         i++;
     }
         free(gbl->m_forks);
+        free(gbl->philo);
         //free(&gbl->m_philo[i]);
         //free(&gbl->m_forks[i]);
-        free(gbl->philo);
     return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 12:27:38 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 21:01:29 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/18 22:03:08 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void    ft_messages_dead(t_philo *philo, long int time, t_gbl *gbl, char *messag
     if (pthread_mutex_lock(&gbl->talk) == 0)
     {
         aff_msg(time, philo->id + 1, message, 1);
+        pthread_mutex_unlock(&philo->gbl->wait);
+        pthread_mutex_lock(&gbl->talk);
     }
 }
 
