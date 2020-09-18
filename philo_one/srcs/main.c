@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 13:21:53 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/18 17:41:12 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,24 @@ int        init_gbl(int argc, char **argv, t_gbl *gbl)
 int        init_mutex(t_gbl *gbl)
 {  
     int                 i;
+    long int            time;
 
     gbl->philo = NULL;
     i = 0;
-    gbl->m_forks = ft_calloc(sizeof(pthread_mutex_t ), gbl->maxphilo);
+    time = get_time(0);
+    gbl->m_forks = ft_calloc(sizeof(pthread_mutex_t), gbl->maxphilo);
     gbl->philo = ft_calloc(sizeof(t_philo), gbl->maxphilo);
-    gbl->t_start = get_time(0);
     pthread_mutex_init(&gbl->m_isdead, NULL);
-    pthread_mutex_lock(&gbl->m_isdead);
+    pthread_mutex_unlock(&gbl->m_isdead);
     while (i < gbl->maxphilo)
     {
         pthread_mutex_init(&gbl->m_forks[i], NULL);
 	    pthread_mutex_unlock(&gbl->m_forks[i]);
         ft_bzero(&gbl->philo[i], sizeof(t_philo));
+        gbl->philo[i].t_start = time;
         gbl->philo[i].id = i;
-        gbl->philo[i].t_die = 1;
         gbl->philo[i].gbl = gbl;
+        gbl->philo[i].t_die = -1;
         i++;
     }
     return (1);
@@ -64,8 +66,9 @@ void        init_philo(t_gbl *gbl)
         if (pthread_create(&thread[gbl->thread], NULL, ft_start, gbl) != 0)
             return ;
         pthread_detach(thread[gbl->thread]);
-        osleep(6);
+        osleep(1);
         gbl->thread += 1;
+        osleep(1);
     }
 }
 
@@ -79,8 +82,8 @@ int         main(int argc, char **argv)
             return (0);
         init_mutex(&gbl);
         init_philo(&gbl);
-        pthread_mutex_lock(&gbl.m_isdead);
-        free_all(&gbl);
+        monitoring(&gbl);
+        //free_all(&gbl);
     }
     else if (argc < 5)
         ft_putstr_fd("More arguments needed\n", 2);
