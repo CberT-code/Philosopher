@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:21:06 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/16 12:05:20 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/18 22:34:27 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			size_int(long int nb)
 	return (++i);
 }
 
-int		ft_nb_to_char(char *dst, char *src, long int nb)
+int			ft_nb_to_char(char *dst, char *src, long int nb)
 {
 	int i;
 
@@ -36,7 +36,7 @@ int		ft_nb_to_char(char *dst, char *src, long int nb)
 	while (--i >= 0)
 	{
 		src[i] = i != 0 ? ((nb % 10) + '0') : nb + '0';
-    	nb = (nb / 10);
+		nb = (nb / 10);
 	}
 	i = -1;
 	while (src[++i])

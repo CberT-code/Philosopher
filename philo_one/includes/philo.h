@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:23:34 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 21:01:41 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/18 22:29:13 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,13 @@ unsigned long long              ft_atoi(const char *str);
 void	                        ft_bzero(void *s, size_t n);
 void                            *ft_calloc(size_t n, size_t size);
 void		                    aff_msg(long int nb, int id, char *str2, int fd);
-
 void                            *ft_start(void *gbl);
 void                            ft_messages(t_philo *philo, long int time, t_gbl *gbl, char *message);
 void                            ft_messages_dead(t_philo *philo, long int time, t_gbl *gbl, char *message);
-
 long int                        get_time(long int type);
 void                            osleep(long int time);
-
-
 t_philo		                    *find_philo(int id, t_gbl *gbl);
-
 void		                    monitoring(t_gbl *gbl);
-
 int                             free_all(t_gbl *gbl);
-
 void		                    *monitor(void *args);
 #endif

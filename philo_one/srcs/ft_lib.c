@@ -6,48 +6,40 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:21:06 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/11 13:09:34 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/18 22:33:31 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int                             ft_strlen(char *str)
+int                             	ft_strlen(char *str)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (str[i])
-        i++;
-    return (i);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
-void	ft_putstr_fd(char *str, int fd)
+unsigned long long             	ft_atoi(const char *str)
 {
-	if (fd < 0 || !str)
-		return ;
-        write(fd, str, ft_strlen(str));
+	unsigned long long result;
 
+	result = 0;
+	while (*str == '\t' || *str == '\n' || *str == '\v' || *str == '\f' ||
+					*str == '\r' || *str == 32)
+			str++;
+	while (*str >= 48 && *str <= 57)
+	{
+			result *= 10;
+			result += (*str - 48);
+			str++;
+	}
+	return (result);	
 }
 
-unsigned long long              ft_atoi(const char *str)
-{
-        unsigned long long result;
-
-        result = 0;
-        while (*str == '\t' || *str == '\n' || *str == '\v' || *str == '\f' ||
-                        *str == '\r' || *str == 32)
-                str++;
-        while (*str >= 48 && *str <= 57)
-        {
-                result *= 10;
-                result += (*str - 48);
-                str++;
-        }
-        return (result);
-}
-
-void	ft_bzero(void *s, size_t n)
+void							ft_bzero(void *s, size_t n)
 {
 	unsigned char *i;
 
@@ -59,7 +51,7 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-void	*ft_calloc(size_t n, size_t size)
+void							*ft_calloc(size_t n, size_t size)
 {
 	void *new;
 
