@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 13:03:01 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 22:09:23 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/18 22:12:25 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		*monitor(void *args)
 		{
 			philo->gbl->is_dead = 1;
 			if (philo->gbl->nb_max_eat != philo->gbl->maxphilo)
-				ft_messages_dead(philo, get_time(philo->gbl->t_start), philo->gbl, "IS DEAD");
+				ft_messages_dead(philo, get_time(philo->gbl->t_start), philo->gbl, "died");
 			return (philo);
 		}
 		pthread_mutex_unlock(&philo->lock);
