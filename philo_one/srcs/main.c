@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 19:29:24 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/18 21:02:07 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int        init_gbl(int argc, char **argv, t_gbl *gbl)
     pthread_mutex_init(&gbl->wait, NULL);
     pthread_mutex_unlock(&gbl->talk);
     pthread_mutex_lock(&gbl->wait);
-    gbl->max_eat = 0;
+    gbl->max_eat = -1;
+    gbl->nb_max_eat = 0;
     gbl->is_dead = 0;
     if ((gbl->maxphilo = ft_atoi(argv[1])) == 0 ||
     (gbl->t_to_die = ft_atoi(argv[2])) == 0 ||
@@ -46,7 +47,7 @@ int        init_mutex(t_gbl *gbl)
         pthread_mutex_init(&gbl->m_forks[i], NULL);
 	    pthread_mutex_unlock(&gbl->m_forks[i]);
         ft_bzero(&gbl->philo[i], sizeof(t_philo));
-        gbl->philo[i].id = i + 1;
+        gbl->philo[i].id = i;
         gbl->philo[i].gbl = gbl;
         gbl->philo[i].t_die = -1;
         i++;
@@ -67,7 +68,7 @@ void        init_philo(t_gbl *gbl)
         if (pthread_create(&thread[i], NULL, ft_start, philo) != 0)
             return ;
         pthread_detach(thread[i]);
-        osleep(1);
+        osleep(3);
         i++;
     }
 }

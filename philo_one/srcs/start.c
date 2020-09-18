@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 12:27:38 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 19:27:57 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/18 21:01:29 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void    ft_messages_dead(t_philo *philo, long int time, t_gbl *gbl, char *messag
 {
     if (pthread_mutex_lock(&gbl->talk) == 0)
     {
-        aff_msg(time, philo->id, message, 1);
+        aff_msg(time, philo->id + 1, message, 1);
     }
 }
 
@@ -24,8 +24,8 @@ void    ft_messages2(t_philo *philo, long int time, t_gbl *gbl, char *message)
 {
     if (pthread_mutex_lock(&gbl->talk) == 0)
     {
-        aff_msg(time, philo->id, "has taken a fork", 1);
-        aff_msg(time, philo->id, message, 1);
+        aff_msg(time, philo->id + 1, "has taken a fork", 1);
+        aff_msg(time, philo->id + 1, message, 1);
     }
         pthread_mutex_unlock(&gbl->talk);
 }
@@ -50,9 +50,11 @@ void    ft_eat(t_philo *philo, t_gbl *gbl, char *message)
         if (pthread_mutex_lock(&gbl->m_forks[philo->id]) == 0)
         {
             pthread_mutex_lock(&philo->lock);
-            ft_messages2(philo, get_time(gbl->t_start), gbl, message);
             philo->t_die = get_time(0);
+            ft_messages2(philo, get_time(gbl->t_start), gbl, message);
             philo->eat += 1;
+            if (philo->eat == gbl->max_eat)
+                gbl->nb_max_eat++;
             osleep(gbl->t_to_eat);
             pthread_mutex_unlock(&gbl->m_forks[philo->id]);
             pthread_mutex_unlock(&gbl->m_forks[philo->id + i]);

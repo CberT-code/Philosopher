@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 13:03:01 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 19:24:31 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/18 21:03:48 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,17 @@ void		*monitor(void *args)
 	while (philo->gbl->is_dead == 0)
 	{
 		pthread_mutex_lock(&philo->lock);
-		if (get_time(philo->t_die) > philo->gbl->t_to_die && philo->gbl->is_dead == 0)
+		if ((get_time(philo->t_die) > philo->gbl->t_to_die || 
+		philo->gbl->nb_max_eat == philo->gbl->maxphilo) && philo->gbl->is_dead == 0)
 		{
-			ft_messages_dead(philo, get_time(philo->gbl->t_start), philo->gbl, "\033[1;31mIS DEAD\033[0;0m");
+			if (philo->gbl->nb_max_eat != philo->gbl->maxphilo)
+				ft_messages_dead(philo, get_time(philo->gbl->t_start), philo->gbl, "\033[1;31mIS DEAD\033[0;0m");
 			philo->gbl->is_dead = 1;
-			pthread_mutex_unlock(&philo->lock);
 			pthread_mutex_unlock(&philo->gbl->wait);
 			return (philo);
 		}
-		osleep(1);
+		pthread_mutex_unlock(&philo->lock);
+		//osleep(1);
 	}
 	return (philo);
 }
