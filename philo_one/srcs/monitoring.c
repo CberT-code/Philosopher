@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 13:03:01 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 17:41:58 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/18 19:24:31 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,30 @@
 // MONITORING SANS THREAD //
 
 
-void		monitoring(t_gbl *gbl)
-{
-	int			i;
-	t_philo		*philo;
+// void		monitoring(t_gbl *gbl)
+// {
+// 	int			i;
+// 	t_philo		*philo;
 
-	philo = gbl->philo;
-	while (gbl->is_dead == -1)
-	{
-		i = 0;
-		while (i < gbl->maxphilo && gbl->is_dead == -1)
-		{
-			if ((get_time(philo[i].t_die) > gbl->time_to_die ||
-			(gbl->max_eat != -1 && philo[i].eat == gbl->max_eat))
-			&& philo[i].t_die != -1)
-			{
-				gbl->is_dead = i;
-				ft_messages_dead(&philo[i], get_time(philo[i].t_start), gbl, "IS DEAD");
-				//ft_messages(&philo[i], get_time(philo[i].t_start), gbl, "\033[1;31mIS DEAD\033[0;0m");
-				return ;
-			}
-			i += 1;
-		}
-	}
-}
+// 	philo = gbl->philo;
+// 	while (gbl->is_dead == -1)
+// 	{
+// 		i = 0;
+// 		while (i < gbl->maxphilo && gbl->is_dead == -1)
+// 		{
+// 			if ((get_time(philo[i].t_die) > gbl->time_to_die ||
+// 			(gbl->max_eat != -1 && philo[i].eat == gbl->max_eat))
+// 			&& philo[i].t_die != -1)
+// 			{
+// 				gbl->is_dead = i;
+// 				ft_messages_dead(&philo[i], get_time(philo[i].t_start), gbl, "IS DEAD");
+// 				//ft_messages(&philo[i], get_time(philo[i].t_start), gbl, "\033[1;31mIS DEAD\033[0;0m");
+// 				return ;
+// 			}
+// 			i += 1;
+// 		}
+// 	}
+// }
 
 
 // void		*monitor(void *args)
@@ -88,3 +88,25 @@ void		monitoring(t_gbl *gbl)
 // 	if (gbl->is_dead != -2)
 // 		ft_messages(&gbl->philo[gbl->is_dead], gbl->dead_time, gbl, "\033[1;31mIS DEAD\033[0;0m");
 // }
+
+
+void		*monitor(void *args)
+{
+	t_philo		*philo;
+
+	philo = (t_philo*)args;
+	while (philo->gbl->is_dead == 0)
+	{
+		pthread_mutex_lock(&philo->lock);
+		if (get_time(philo->t_die) > philo->gbl->t_to_die && philo->gbl->is_dead == 0)
+		{
+			ft_messages_dead(philo, get_time(philo->gbl->t_start), philo->gbl, "\033[1;31mIS DEAD\033[0;0m");
+			philo->gbl->is_dead = 1;
+			pthread_mutex_unlock(&philo->lock);
+			pthread_mutex_unlock(&philo->gbl->wait);
+			return (philo);
+		}
+		osleep(1);
+	}
+	return (philo);
+}
