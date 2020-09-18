@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 22:35:39 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/18 22:49:45 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int			init_gbl(int argc, char **argv, t_gbl *gbl)
 }
 
 int			init_mutex(t_gbl *gbl)
-{  
-	int		i;
+{
+	int	i;
 
 	gbl->philo = NULL;
 	i = 0;
@@ -75,8 +75,8 @@ void		init_philo(t_gbl *gbl)
 
 int			main(int argc, char **argv)
 {
-	t_gbl   gbl;
-	
+	t_gbl	gbl;
+
 	if (argc == 5 || argc == 6)
 	{
 		if (init_gbl(argc, argv, &gbl) == 0)

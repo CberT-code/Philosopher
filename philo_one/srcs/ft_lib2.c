@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:21:06 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 22:34:27 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/18 22:48:09 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int			ft_nb_to_char(char *dst, char *src, long int nb)
 
 void		aff_msg(long int nb, int id, char *str2, int fd)
 {
-	int 	i;
-	char 	res[50];
+	int		i;
+	char	res[50];
 	char	str[50];
 
 	i = ft_nb_to_char(res, str, nb);
