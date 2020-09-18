@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 22:07:23 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/18 22:09:11 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void        init_philo(t_gbl *gbl)
         pthread_detach(thread[i]);
         osleep(1);
         i++;
-
     }
 }
 
@@ -85,7 +84,6 @@ int         main(int argc, char **argv)
         init_mutex(&gbl);
         init_philo(&gbl);
         pthread_mutex_lock(&gbl.wait);
-        //monitoring(&gbl);
         free_all(&gbl);
     }
     else if (argc < 5)
