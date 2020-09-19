@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/19 20:52:30 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/19 21:08:43 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		free_all(t_gbl *gbl)
 {
-	int		i;
+	int 	i;
 	char	res[50];
 	char	str[50];
 

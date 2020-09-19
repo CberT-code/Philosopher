@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/19 20:56:30 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/19 20:56:43 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int			init_mutex(t_gbl *gbl)
 
 void		init_philo(t_gbl *gbl)
 {
-	pthread_t	thread[gbl->maxphilo];
+	pid_t		pid[gbl->maxphilo];
 	int			i;
 	void		*philo;
 
@@ -76,12 +76,15 @@ void		init_philo(t_gbl *gbl)
 	while (i < gbl->maxphilo)
 	{
 		philo = (void *)&gbl->philo[i];
-		if (pthread_create(&thread[i], NULL, ft_start, philo) != 0)
-			return ;
-		pthread_detach(thread[i]);
+		if (!(pid[i] = fork()))
+			ft_start(philo);
 		osleep(1);
 		i++;
 	}
+	sem_wait(gbl->wait);
+	i = -1;
+	while (++i < gbl->maxphilo)
+		kill(pid[i], SIGKILL);
 }
 
 int			main(int argc, char **argv)
@@ -94,7 +97,6 @@ int			main(int argc, char **argv)
 			return (0);
 		init_mutex(&gbl);
 		init_philo(&gbl);
-		sem_wait(gbl.wait);
 		free_all(&gbl);
 	}
 	else if (argc < 5)

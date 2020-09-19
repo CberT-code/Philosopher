@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"type_traits": "c",
-		"__threading_support": "c"
+		"__threading_support": "c",
+		"typeinfo": "c"
 	}
 }

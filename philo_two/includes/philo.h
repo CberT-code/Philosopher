@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:23:34 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 22:59:26 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/19 20:57:39 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,17 @@
 # include <time.h>
 # include <sys/time.h>
 # include <stdlib.h>
+# include <semaphore.h>
+# include <errno.h>
+# include <string.h>
 
 typedef struct					s_philo
 {
 	int							id;
 	long int					t_die;
 	int							eat;
+	sem_t						*lock;
 	struct s_gbl				*gbl;
-	pthread_mutex_t				lock;
 }								t_philo;
 
 typedef struct					s_gbl
@@ -42,14 +45,15 @@ typedef struct					s_gbl
 	long int					t_to_sleep;
 	long int					dead_time;
 	t_philo						*philo;
-	pthread_mutex_t				*m_forks;
-	pthread_mutex_t				wait;
-	pthread_mutex_t				talk;
+	sem_t						*s_forks;
+	sem_t						*wait;
+	sem_t						*talk;
 }								t_gbl;
 
 int								ft_strlen(char *str);
 void							ft_putstr_fd(char *str, int fd);
 unsigned long long				ft_atoi(const char *str);
+int								ft_nb_to_char(char *dst, char *src, long int nb);
 void							ft_bzero(void *s, size_t n);
 void							*ft_calloc(size_t n, size_t size);
 void							aff_msg(long int nb, int id, char *str2,

@@ -1,4 +1,4 @@
-NAME = 			philo_two
+NAME = 			philo_three
 
 SRCS_PATH = ./srcs/
 OBJS_PATH = ./objs/
