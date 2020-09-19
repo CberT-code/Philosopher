@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:23:34 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/19 21:12:48 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/19 22:11:49 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct					s_philo
 	long int					t_die;
 	int							eat;
 	sem_t						*lock;
+	sem_t						*max_eat;
 	struct s_gbl				*gbl;
 }								t_philo;
 
@@ -71,4 +72,5 @@ t_philo							*find_philo(int id, t_gbl *gbl);
 void							monitoring(t_gbl *gbl);
 int								free_all(t_gbl *gbl);
 void							*monitor(void *args);
+void							*monitor2(void *args);
 #endif

@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/19 21:14:43 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/19 22:30:36 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ int			init_mutex(t_gbl *gbl)
 	char	res[50];
 	char	str[50];
 
-	i = 0;
+	i = -1;
 	gbl->philo = NULL;
 	gbl->t_start = get_time(0);
 	gbl->s_forks = init_sem("Sem_Fork", gbl->maxphilo);
 	gbl->philo = ft_calloc(sizeof(t_philo), gbl->maxphilo);
-	while (i < gbl->maxphilo)
+	while (++i < gbl->maxphilo)
 	{
 		ft_bzero(&gbl->philo[i], sizeof(t_philo));
 		res[ft_nb_to_char(res, str, i)] = '\0';
@@ -60,17 +60,24 @@ int			init_mutex(t_gbl *gbl)
 		gbl->philo[i].gbl = gbl;
 		gbl->philo[i].t_die = -1;
 		gbl->philo[i].lock = init_sem(res, 1);
-		i++;
+		res[0] = 'a';
+		res[ft_nb_to_char(res + 1, str, i) + 1] = '\0';
+		gbl->philo[i].max_eat = init_sem(res, 0);
 	}
 	return (1);
 }
 
 void		init_philo(t_gbl *gbl)
 {
+	pthread_t	thread;
 	pid_t		pid[gbl->maxphilo];
 	int			i;
 	void		*philo;
 
+	philo = (void*)gbl;
+	if (pthread_create(&thread, NULL, monitor2, philo) != 0)
+		return ;
+	pthread_detach(thread);
 	i = 0;
 	while (i < gbl->maxphilo)
 	{

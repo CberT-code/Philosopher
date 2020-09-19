@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/19 21:13:33 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/19 21:57:00 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ int		free_all(t_gbl *gbl)
 	while (i < gbl->maxphilo)
 	{
 		res[ft_nb_to_char(res, str, i)] = '\0';
+		sem_unlink(res);
+		res[0] = 'a';
+		res[ft_nb_to_char(res + 1, str, i) + 1] = '\0';
 		sem_unlink(res);
 		i++;
 	}
