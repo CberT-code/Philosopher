@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 12:27:38 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/19 20:58:09 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/19 21:11:26 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	*ft_start(void *args)
 	gbl = philo->gbl;
 	philo->t_die = get_time(0);
 	if (pthread_create(&t_monitor, NULL, &monitor, philo) != 0)
-		return ((void*)1);
+		return (gbl);
 	pthread_detach(t_monitor);
 	while (philo->gbl->is_dead == 0)
 	{
