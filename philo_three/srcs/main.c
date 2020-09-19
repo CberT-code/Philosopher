@@ -6,13 +6,13 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/19 20:56:43 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/19 21:14:43 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-sem_t			*init_sem(char *str, int i)
+sem_t		*init_sem(char *str, int i)
 {
 	sem_t *res;
 
@@ -46,7 +46,6 @@ int			init_mutex(t_gbl *gbl)
 	int		i;
 	char	res[50];
 	char	str[50];
-
 
 	i = 0;
 	gbl->philo = NULL;

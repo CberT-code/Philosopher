@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:23:34 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/19 20:57:39 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/19 21:13:45 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ typedef struct					s_gbl
 int								ft_strlen(char *str);
 void							ft_putstr_fd(char *str, int fd);
 unsigned long long				ft_atoi(const char *str);
-int								ft_nb_to_char(char *dst, char *src, long int nb);
+int								ft_nb_to_char(char *dst, char *src,
+long int nb);
 void							ft_bzero(void *s, size_t n);
 void							*ft_calloc(size_t n, size_t size);
 void							aff_msg(long int nb, int id, char *str2,

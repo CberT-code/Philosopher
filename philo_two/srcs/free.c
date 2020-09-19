@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/19 20:52:30 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/19 21:14:21 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		free_all(t_gbl *gbl)
 	char	str[50];
 
 	i = 0;
-	while(i < gbl->maxphilo)
+	while (i < gbl->maxphilo)
 	{
 		res[ft_nb_to_char(res, str, i)] = '\0';
 		sem_unlink(res);
