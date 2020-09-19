@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 12:27:38 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 22:58:28 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/19 12:22:22 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	ft_eat(t_philo *philo, t_gbl *gbl, char *message)
 		ft_msg(philo, get_time(gbl->t_start), gbl, "has taken a fork");
 		if (pthread_mutex_lock(&gbl->m_forks[philo->id]) == 0)
 		{
-			pthread_mutex_lock(&philo->lock);
 			philo->t_die = get_time(0);
 			ft_msg2(philo, get_time(gbl->t_start), gbl, message);
 			philo->eat += 1;
@@ -48,7 +47,6 @@ void	ft_eat(t_philo *philo, t_gbl *gbl, char *message)
 			osleep(gbl->t_to_eat);
 			pthread_mutex_unlock(&gbl->m_forks[philo->id]);
 			pthread_mutex_unlock(&gbl->m_forks[philo->id + i]);
-			pthread_mutex_unlock(&philo->lock);
 		}
 	}
 }
@@ -71,7 +69,6 @@ void	*ft_start(void *args)
 	if (pthread_create(&t_monitor, NULL, &monitor, philo) != 0)
 		return ((void*)1);
 	pthread_detach(t_monitor);
-	ft_msg(philo, get_time(gbl->t_start), philo->gbl, "was created");
 	while (philo->gbl->is_dead == 0)
 	{
 		ft_eat(philo, gbl, "is eating");

@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 23:15:09 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/19 12:23:06 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int		free_all(t_gbl *gbl)
 	while (i < gbl->maxphilo)
 	{
 		pthread_mutex_destroy(&gbl->m_forks[i]);
-		pthread_mutex_destroy(&gbl->philo[i].lock);
 		i++;
 	}
 	pthread_mutex_destroy(&gbl->wait);

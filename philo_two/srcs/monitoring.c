@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 13:03:01 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 22:53:14 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/19 12:18:22 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void		*monitor(void *args)
 	gbl = philo->gbl;
 	while (gbl->is_dead == 0)
 	{
-		pthread_mutex_lock(&philo->lock);
 		if ((get_time(philo->t_die) > gbl->t_to_die ||
 		gbl->nb_max_eat == gbl->maxphilo) &&
 		gbl->is_dead == 0)
@@ -31,7 +30,6 @@ void		*monitor(void *args)
 				ft_msg_dead(philo, get_time(gbl->t_start), gbl, "died");
 			return (philo);
 		}
-		pthread_mutex_unlock(&philo->lock);
 		osleep(1);
 	}
 	return (philo);
