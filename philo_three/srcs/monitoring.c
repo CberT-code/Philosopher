@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 13:03:01 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/19 22:14:30 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/19 23:03:11 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		*monitor(void *args)
 void		*monitor2(void *args)
 {
 	t_gbl		*gbl;
-	int 		i;
+	int			i;
 
 	i = 0;
 	gbl = (t_gbl*)args;
