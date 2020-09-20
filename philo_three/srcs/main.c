@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/19 22:30:36 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/20 11:05:53 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ sem_t		*init_sem(char *str, int i)
 int			init_gbl(int argc, char **argv, t_gbl *gbl)
 {
 	gbl->talk = init_sem("Sem_Talk", 1);
-	gbl->wait = init_sem("Sem_Wait", 1);
-	sem_wait(gbl->wait);
+	gbl->wait = init_sem("Sem_Wait", 0);
 	gbl->max_eat = -1;
 	gbl->nb_max_eat = 0;
 	gbl->is_dead = 0;
@@ -55,6 +54,8 @@ int			init_mutex(t_gbl *gbl)
 	while (++i < gbl->maxphilo)
 	{
 		ft_bzero(&gbl->philo[i], sizeof(t_philo));
+		ft_bzero(&res, sizeof(char) * 50);
+		ft_bzero(&str, sizeof(char) * 50);
 		res[ft_nb_to_char(res, str, i)] = '\0';
 		gbl->philo[i].id = i;
 		gbl->philo[i].gbl = gbl;

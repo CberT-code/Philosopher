@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:21:06 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/18 23:01:28 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/20 10:18:21 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ unsigned long long				ft_atoi(const char *str)
 		result += (*str - 48);
 		str++;
 	}
+	if (*str != '\0')
+		return (0);
 	return (result);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:03:20 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/19 21:14:35 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/20 11:04:12 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ sem_t		*init_sem(char *str, int i)
 int			init_gbl(int argc, char **argv, t_gbl *gbl)
 {
 	gbl->talk = init_sem("Sem_Talk", 1);
-	gbl->wait = init_sem("Sem_Wait", 1);
-	sem_wait(gbl->wait);
+	gbl->wait = init_sem("Sem_Wait", 0);
 	gbl->max_eat = -1;
 	gbl->nb_max_eat = 0;
 	gbl->is_dead = 0;
