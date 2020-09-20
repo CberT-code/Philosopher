@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 13:03:01 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/19 20:59:16 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/20 10:08:48 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void		*monitor(void *args)
 			gbl->is_dead = 1;
 			if (gbl->nb_max_eat != gbl->maxphilo)
 				ft_msg_dead(philo, get_time(gbl->t_start), gbl, "died");
+			sem_post(gbl->wait);
 			return (philo);
 		}
 		sem_post(philo->lock);
