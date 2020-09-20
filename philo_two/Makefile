@@ -32,11 +32,11 @@ run :
 		make re
 		./$(NAME)
 
-git:			fclean
-				git add -A
-				git add *
-				git commit -u -m "$(LOGFILE) $(MSG)"
-				git push
+git:	fclean
+		git add -A
+		git add *
+		git commit -u -m "$(LOGFILE) $(MSG)"
+		git push
 
 clean:
 		@rm -rf $(OBJS_PATH)
@@ -48,4 +48,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY:			all clean fclean re git
+.PHONY:	all clean fclean re git

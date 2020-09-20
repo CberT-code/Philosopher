@@ -48,4 +48,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY:			all clean fclean re git
+.PHONY: all clean fclean re git
