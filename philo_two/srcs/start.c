@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 12:27:38 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/19 21:11:26 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/20 08:02:09 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ void	ft_msg(t_philo *philo, long int time, t_gbl *gbl, char *message)
 
 void	ft_eat(t_philo *philo, t_gbl *gbl, char *message)
 {
-	int i;
-
-	i = (philo->id == 0) ? gbl->maxphilo - 1 : -1;
 	if (sem_wait(gbl->s_forks) == 0 && sem_wait(gbl->s_forks) == 0)
 	{
 		sem_wait(philo->lock);

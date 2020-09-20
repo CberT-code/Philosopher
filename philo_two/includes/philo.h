@@ -6,7 +6,7 @@
 /*   By: cbertola <cbertola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 10:23:34 by cbertola          #+#    #+#             */
-/*   Updated: 2020/09/19 21:13:45 by cbertola         ###   ########.fr       */
+/*   Updated: 2020/09/20 08:02:01 by cbertola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <semaphore.h>
 # include <errno.h>
 # include <string.h>
+# include <fcntl.h>
+# include <sys/stat.h> 
 
 typedef struct					s_philo
 {
