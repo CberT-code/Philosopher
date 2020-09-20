@@ -1,5 +1,4 @@
 NAME = 			philo_three
-MAC  = 			philo_three
 
 SRCS_PATH = ./srcs/
 OBJS_PATH = ./objs/
@@ -8,7 +7,6 @@ INCS_PATH = ./includes/
 SRCS = $(addprefix $(SRCS_PATH),$(SRCS_NAME))
 OBJS = $(addprefix $(OBJS_PATH),$(OBJS_NAME))
 INCS = $(addprefix -I,$(INCS_PATH)) -lpthread
-INCM = $(addprefix -I,$(INCS_PATH))
 
 OBJS_NAME = $(SRCS_NAME:.c=.o)
 
@@ -22,14 +20,8 @@ LOGFILE	=		$(LOGPATH) `date +'%y.%m.%d %H:%M:%S'`
 
 all: 			$(NAME)
 
-alm: 			$(MAC)
-
 $(NAME):	$(OBJS)
 		$(CC) -o $(NAME) $(OBJS) $(INCS) 
-		@echo "\033[0;34mExecutable Philo \033[0m \033[0;32m [OK] \033[0m"
-
-$(MAC):		$(OBJS)
-		$(CC) -o $(MAC) $(OBJS) $(INCM) 
 		@echo "\033[0;34mExecutable Philo \033[0m \033[0;32m [OK] \033[0m"
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c includes/philo.h
@@ -56,6 +48,4 @@ fclean: clean
 
 re: fclean all
 
-mac: fclean alm
-
-.PHONY:			all alm clean fclean re git mac
+.PHONY:			all clean fclean re git
